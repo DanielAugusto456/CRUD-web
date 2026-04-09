@@ -5,16 +5,23 @@ const fs = require('fs').promises;
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: 'http://127.0.0.1:5500',  // Solo este origen
+    origin: process.env.CORS_ORIGIN || '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type']
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('API de Usuarios funcionando correctamente. Usa /users para ver los datos.');
+});
+
+// manejar el frontend
+app.use(express.static('public'));
 
 const archivoUsuarios = path.join(__dirname, 'datos', 'usuarios.json');
 

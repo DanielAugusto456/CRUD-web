@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/users';
+const API_URL = '/users';
 
 // Obtener y mostrar todos los usuarios
 async function cargarUsuarios() {
